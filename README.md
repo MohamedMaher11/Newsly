@@ -1,7 +1,7 @@
 📰 NewsApp
 Welcome to NewsApp! Stay updated with the latest news effortlessly.
 
-Features 🌟
+Features -🌟-
 🗂️ Categories: Organized news by categories.
 📰 News List: View the latest articles.
 🔍 Search: Find news quickly.
