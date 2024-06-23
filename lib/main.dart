@@ -6,7 +6,7 @@ import 'package:newsapp/Features/news/Data/Service/service.dart';
 import 'package:newsapp/Features/news/Data/model/category.dart';
 import 'package:newsapp/Features/news/Domain/Usecase/search.dart';
 import 'package:newsapp/Features/news/Domain/Usecase/usecase.dart';
-import 'package:newsapp/Features/news/Presentation/Screen/news_page.dart';
+import 'package:newsapp/Features/news/Presentation/Screen/NewsPages/new_page.dart';
 import 'package:newsapp/Features/news/Presentation/cubit/cubit.dart';
 import 'package:newsapp/Features/news/Presentation/cubit/searchcubit.dart';
 import 'package:newsapp/core/api/dio_consumer.dart';

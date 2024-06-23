@@ -13,7 +13,7 @@ class NewsCategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(category), // عنوان الصفحة يكون اسم الفئة
+        title: Text(category),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),

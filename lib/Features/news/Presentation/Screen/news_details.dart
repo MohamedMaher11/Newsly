@@ -14,71 +14,70 @@ class NewsDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(news.title ?? 'News Detail'),
       ),
-      body: ListView(
+      body: Padding(
         padding: EdgeInsets.all(16),
-        children: <Widget>[
-          if (news.urlToImage != null)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                news.urlToImage!,
-                width: double.infinity,
-                height: 200,
-                fit: BoxFit.cover,
+        child: ListView(
+          children: <Widget>[
+            if (news.urlToImage != null)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  news.urlToImage!,
+                  width: double.infinity,
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          SizedBox(height: 16),
-          Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    news.title ?? '',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  if (news.publishedAt != null)
+            SizedBox(height: 16),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
                     Text(
-                      DateFormat.yMMMMd()
-                          .format(DateTime.parse(news.publishedAt!)),
+                      news.title ?? '',
                       style: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: 14,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  SizedBox(height: 16),
-                  if (news.content != null)
-                    Text(
-                      news.content ?? '',
-                      style: TextStyle(
-                        fontSize: 16,
+                    SizedBox(height: 8),
+                    if (news.publishedAt != null)
+                      Text(
+                        DateFormat.yMMMMd()
+                            .format(DateTime.parse(news.publishedAt!)),
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 14,
+                        ),
                       ),
-                    ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  GestureDetector(
+                    SizedBox(height: 16),
+                    if (news.content != null)
+                      Text(
+                        news.content ?? '',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    SizedBox(height: 10),
+                    GestureDetector(
+                      onTap: () => _launchUrl(news.url!),
                       child: Text(
                         "Show Full Article",
                         style: TextStyle(fontSize: 15, color: Colors.blue),
                       ),
-                      onTap: () {
-                        _launchUrl(news.url!);
-                      })
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

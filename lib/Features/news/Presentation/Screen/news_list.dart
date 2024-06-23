@@ -24,69 +24,26 @@ class NewsList extends StatelessWidget {
             );
           },
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Card(
               elevation: 8,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(article.urlToImage ?? ''),
-                            fit: BoxFit.cover,
-                          ),
-                          color: Colors.grey[200],
-                        ),
-                        child: article.urlToImage != null
-                            ? Image.network(
-                                article.urlToImage!,
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
-                              )
-                            : Icon(Icons.image, size: 50, color: Colors.grey),
-                      ),
-                    ),
+                    _buildArticleImage(article),
                     SizedBox(width: 16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            article.title ?? '',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          _buildArticleTitle(article),
                           SizedBox(height: 4),
-                          Row(
-                            children: <Widget>[
-                              Icon(Icons.calendar_today,
-                                  color: Colors.grey[600], size: 16),
-                              SizedBox(width: 4),
-                              Text(
-                                DateFormat.yMMMMd().format(
-                                  DateTime.parse(article.publishedAt ?? ''),
-                                ),
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                ),
-                              ),
-                            ],
-                          ),
+                          _buildArticleDate(article),
                         ],
                       ),
                     ),
@@ -97,6 +54,54 @@ class NewsList extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildArticleImage(News article) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        width: 100,
+        height: 100,
+        color: Colors.grey[200],
+        child: article.urlToImage != null
+            ? Image.network(
+                article.urlToImage!,
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+              )
+            : Icon(Icons.image, size: 50, color: Colors.grey),
+      ),
+    );
+  }
+
+  Widget _buildArticleTitle(News article) {
+    return Text(
+      article.title ?? '',
+      style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  Widget _buildArticleDate(News article) {
+    return Row(
+      children: <Widget>[
+        Icon(Icons.calendar_today, color: Colors.grey[600], size: 16),
+        SizedBox(width: 4),
+        Text(
+          DateFormat.yMMMMd().format(
+            DateTime.parse(article.publishedAt ?? ''),
+          ),
+          style: TextStyle(
+            color: Colors.grey[600],
+          ),
+        ),
+      ],
     );
   }
 }
