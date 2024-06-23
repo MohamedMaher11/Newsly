@@ -3,58 +3,67 @@ import 'package:intl/intl.dart';
 import 'package:newsapp/Features/news/Data/model/models.dart';
 import 'package:newsapp/Features/news/Presentation/Screen/news_details.dart';
 
-class NewsList extends StatelessWidget {
+class NewsList extends StatefulWidget {
   final List<News> news;
 
   NewsList({required this.news});
 
   @override
+  _NewsListState createState() => _NewsListState();
+}
+
+class _NewsListState extends State<NewsList> {
+  bool _isLoading = false;
+
+  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: news.length,
-      itemBuilder: (context, index) {
-        final article = news[index];
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NewsDetailPage(news: article),
-              ),
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: Card(
-              elevation: 8,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    _buildArticleImage(article),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
+    return _isLoading
+        ? Center(child: CircularProgressIndicator())
+        : ListView.builder(
+            itemCount: widget.news.length,
+            itemBuilder: (context, index) {
+              final article = widget.news[index];
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewsDetailPage(news: article),
+                    ),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: Card(
+                    elevation: 8,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          _buildArticleTitle(article),
-                          SizedBox(height: 4),
-                          _buildArticleDate(article),
+                          _buildArticleImage(article),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                _buildArticleTitle(article),
+                                SizedBox(height: 4),
+                                _buildArticleDate(article),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
-        );
-      },
-    );
+              );
+            },
+          );
   }
 
   Widget _buildArticleImage(News article) {
@@ -103,5 +112,24 @@ class NewsList extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData(); // Call your method to fetch data here
+  }
+
+  void _fetchData() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    // Simulate fetching data delay
+    await Future.delayed(Duration(seconds: 2));
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 }
