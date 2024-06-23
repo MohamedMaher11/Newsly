@@ -1,1 +1,1 @@
-String NewsApi = "YOUR_API_KEY";
+String NewsApi = "5867e7a3659c456b8052175db2b3663c";
