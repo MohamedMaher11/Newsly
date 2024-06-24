@@ -34,7 +34,7 @@ License 📄
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 Contact 📧
-For inquiries or feedback, contact us at your-mmaher1051998@gmail.com.
+For inquiries or feedback, contact us at mmaher1051998@gmail.com.
 
 Happy coding! 💻✨
 
